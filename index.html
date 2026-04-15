@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anastasiia Stoianova — Portfolio</title>
+  <meta name="description" content="Portfolio of Anastasiia Stoianova — Computer Programming student at George Brown College, web developer, and certified ESL instructor.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --accent: #E53935;
+      --accent-dark: #C62828;
+      --accent-light: #FFCDD2;
+      --bg: #FAFAFA;
+      --bg-card: #FFFFFF;
+      --text: #212121;
+      --text-light: #555;
+      --border: #E0E0E0;
+      --radius: 12px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+      --nav-height: 64px;
+    }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--accent-dark); }
+    img { max-width: 100%; height: auto; display: block; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 80px 0; }
+    section:nth-child(even) { background: #fff; }
+    h2 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .section-subtitle {
+      color: var(--text-light);
+      margin-bottom: 40px;
+      font-size: 1.05rem;
+    }
+    .accent { color: var(--accent); }
+
+    /* ── Scroll Animations ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    .nav-brand .accent { font-weight: 800; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 24px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        position: fixed;
+        top: var(--nav-height);
+        left: 0; right: 0;
+        background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .3s ease, padding .3s;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links.open {
+        max-height: 400px;
+        padding: 16px 0;
+      }
+      .nav-links li { width: 100%; text-align: center; }
+      .nav-links a {
+        display: block;
+        padding: 12px 24px;
+        font-size: 1rem;
+        border-bottom: none;
+      }
+    }
+
+    /* ── Hero / Profile ── */
+    .hero {
+      padding-top: calc(var(--nav-height) + 48px);
+      padding-bottom: 0;
+      background: linear-gradient(135deg, #fff 0%, #FFF5F5 50%, #FFEBEE 100%);
+      overflow: hidden;
+    }
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+    .hero-photo-wrapper {
+      flex-shrink: 0;
+      position: relative;
+    }
+    .hero-photo-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #FF8A80);
+      z-index: 0;
+      animation: pulse-ring 3s ease-in-out infinite;
+    }
+    @keyframes pulse-ring {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(1.04); }
+    }
+    .hero-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-text h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
+    .hero-text .title {
+      color: var(--accent);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .hero-text p {
+      color: var(--text-light);
+      font-size: 1rem;
+      max-width: 520px;
+      line-height: 1.7;
+    }
+    .hero-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .hero-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text);
+      background: #fff;
+      transition: border-color .2s, color .2s, box-shadow .2s, transform .2s;
+    }
+    .hero-links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 2px 8px rgba(229,57,53,0.15);
+      transform: translateY(-1px);
+    }
+
+    /* ── Stats Strip ── */
+    .stats-strip {
+      display: flex;
+      gap: 0;
+      margin-top: 40px;
+      border-top: 1px solid var(--border);
+      background: rgba(255,255,255,0.7);
+    }
+    .stat-item {
+      flex: 1;
+      text-align: center;
+      padding: 24px 16px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    @media (max-width: 640px) {
+      .hero-inner { flex-direction: column; text-align: center; }
+      .hero-text p { max-width: 100%; }
+      .hero-links { justify-content: center; }
+      .hero-text h1 { font-size: 1.8rem; }
+      .stats-strip { flex-wrap: wrap; }
+      .stat-item { flex: 1 1 50%; border-bottom: 1px solid var(--border); }
+      .stat-item:nth-child(2) { border-right: none; }
+    }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: box-shadow .3s, transform .3s, border-color .3s;
+    }
+    .skill-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
+      border-color: var(--accent-light);
+    }
+    .skill-card h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .skill-card ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .skill-card li {
+      background: var(--bg);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.84rem;
+      color: var(--text-light);
+      transition: background .2s, color .2s;
+    }
+    .skill-card:hover li {
+      background: #FFEBEE;
+      color: var(--accent-dark);
+    }
+    .resume-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 32px;
+      padding: 12px 28px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background .2s, box-shadow .2s, transform .2s;
+    }
+    .resume-download:hover {
+      background: var(--accent-dark);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(229,57,53,0.3);
+      transform: translateY(-1px);
+    }
+
+    /* ── Experience ── */
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .exp-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: box-shadow .3s, transform .3s;
+    }
+    .exp-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    .exp-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: #FFEBEE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.3rem;
+    }
+    .exp-content h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .exp-content .exp-meta {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .exp-content p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* ── Projects ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: box-shadow .3s, transform .3s;
+    }
+    .project-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+    .project-card-body { padding: 28px; }
+    .project-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .project-card p {
+      color: var(--text-light);
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+      line-height: 1.65;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .project-tags span {
+      background: #FFEBEE;
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    .project-links { display: flex; gap: 16px; }
+    .project-links a {
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color .2s, transform .2s;
+    }
+    .project-links a:hover { transform: translateX(2px); }
+
+    /* ── Education ── */
+    .education-timeline {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 48px;
+    }
+    .education-timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px; top: 4px; bottom: 4px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent-light));
+    }
+    .edu-item {
+      position: relative;
+      margin-bottom: 28px;
+    }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-item::before {
+      content: '';
+      position: absolute;
+      left: -24px; top: 8px;
+      width: 12px; height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px #FFEBEE;
+    }
+    .edu-item h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .edu-item .edu-meta {
+      color: var(--text-light);
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+    }
+    .edu-item .edu-desc {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* ── Certificates Gallery ── */
+    .cert-subtitle {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      margin-top: 8px;
+    }
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .cert-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: box-shadow .3s, transform .3s;
+      background: #fff;
+    }
+    .cert-item:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px) scale(1.02);
+    }
+    .cert-item img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      transition: transform .3s;
+    }
+    .cert-item:hover img {
+      transform: scale(1.05);
+    }
+    .cert-item .cert-label {
+      padding: 10px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-light);
+      text-align: center;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .lightbox.open { display: flex; opacity: 1; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 8px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+      animation: lb-zoom-in .3s ease;
+    }
+    @keyframes lb-zoom-in {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px; right: 28px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 10px 14px;
+      border-radius: 8px;
+      transition: background .2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.25); }
+    .lightbox-caption {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 500;
+      background: rgba(0,0,0,0.5);
+      padding: 8px 20px;
+      border-radius: 8px;
+      max-width: 80vw;
+      text-align: center;
+    }
+
+    /* ── Contact ── */
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text);
+      transition: border-color .2s, box-shadow .3s, transform .2s;
+    }
+    .contact-item:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .contact-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      border-top: 1px solid var(--border);
+      background: #fff;
+    }
+    footer .footer-tagline {
+      font-size: 0.78rem;
+      margin-top: 4px;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════ NAVIGATION (Rubric §5) ════════════ -->
+  <nav aria-label="Main navigation">
+    <div class="nav-inner">
+      <span class="nav-brand">Anastasiia <span class="accent">Stoianova</span></span>
+      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" role="list">
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ════════════ PROFILE / BIO (Rubric §1) ════════════ -->
+  <section class="hero" id="profile">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-photo-wrapper fade-in">
+          <img src="assets/img/profile.png" alt="Photo of Anastasiia Stoianova" class="hero-photo" width="180" height="180">
+        </div>
+        <div class="hero-text">
+          <h1 class="fade-in">Anastasiia Stoianova</h1>
+          <div class="title fade-in fade-in-delay-1">Computer Programming Student &amp; Web Developer</div>
+          <p class="fade-in fade-in-delay-2">
+            I am a Computer Programming student at George Brown College with a strong foundation in full-stack web development.
+            With over 10 years of professional experience in education and communication, I bring a unique combination of technical skills and interpersonal strengths to every project.
+            I am passionate about building clean, accessible, and user-focused web applications.
+          </p>
+          <div class="hero-links fade-in fade-in-delay-3">
+            <a href="https://github.com/AnastasiiaStoianova2025" target="_blank" rel="noopener">
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.21 3.43 9.64 8.21 11.21.6.11.82-.26.82-.57v-2.18c-3.34.72-4.04-1.41-4.04-1.41-.55-1.37-1.33-1.74-1.33-1.74-1.09-.73.08-.72.08-.72 1.2.09 1.84 1.22 1.84 1.22 1.07 1.8 2.8 1.28 3.49.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.5.12-3.12 0 0 1-.32 3.3 1.21a11.6 11.6 0 0 1 6.01 0c2.3-1.53 3.3-1.21 3.3-1.21.66 1.62.25 2.82.12 3.12.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.53-5.48 5.83.43.37.81 1.1.81 2.22v3.29c0 .31.22.69.82.57C20.57 21.93 24 17.5 24 12.29 24 5.78 18.63.5 12 .5z"/></svg>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/englishstoianova/" target="_blank" rel="noopener">
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.21 0 22.23 0z"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://englishstoianova.ca/en/" target="_blank" rel="noopener">
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+              Website
+            </a>
+          </div>
+          <p class="fade-in fade-in-delay-3" style="color:#555;font-size:.95rem;margin-top:.75rem;">anastasiia.stoianova2025@gmail.com</p>
+        </div>
+      </div>
+
+      <!-- Stats Strip -->
+      <div class="stats-strip fade-in">
+        <div class="stat-item">
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Years of Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Certificates</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Languages Spoken</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100+</div>
+          <div class="stat-label">Students Taught</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ SKILLS / RESUME (Rubric §2) ════════════ -->
+  <section id="skills">
+    <div class="container">
+      <h2 class="fade-in">Skills</h2>
+      <p class="section-subtitle fade-in">Technical expertise developed through coursework, personal projects, and professional experience.</p>
+
+      <div class="skills-grid">
+        <div class="skill-card fade-in">
+          <h3>Frontend</h3>
+          <ul>
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+            <li>TypeScript</li>
+            <li>React</li>
+            <li>Astro</li>
+            <li>Tailwind CSS</li>
+          </ul>
+        </div>
+        <div class="skill-card fade-in fade-in-delay-1">
+          <h3>Backend</h3>
+          <ul>
+            <li>Node.js</li>
+            <li>PHP</li>
+            <li>REST APIs</li>
+            <li>SQL</li>
+          </ul>
+        </div>
+        <div class="skill-card fade-in fade-in-delay-2">
+          <h3>Databases</h3>
+          <ul>
+            <li>MySQL</li>
+            <li>PostgreSQL</li>
+          </ul>
+        </div>
+        <div class="skill-card fade-in">
+          <h3>Tools &amp; DevOps</h3>
+          <ul>
+            <li>Git &amp; GitHub</li>
+            <li>VS Code</li>
+            <li>Docker</li>
+            <li>Playwright</li>
+            <li>Vercel</li>
+          </ul>
+        </div>
+        <div class="skill-card fade-in fade-in-delay-1">
+          <h3>Soft Skills</h3>
+          <ul>
+            <li>Communication</li>
+            <li>Teaching</li>
+            <li>Problem-Solving</li>
+            <li>Team Collaboration</li>
+            <li>Multilingual</li>
+          </ul>
+        </div>
+        <div class="skill-card fade-in fade-in-delay-2">
+          <h3>Languages</h3>
+          <ul>
+            <li>English (C2)</li>
+            <li>Ukrainian (Native)</li>
+            <li>Russian (Native)</li>
+            <li>French</li>
+          </ul>
+        </div>
+      </div>
+
+      <a href="assets/resume.pdf" class="resume-download fade-in" download>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Resume (PDF)
+      </a>
+    </div>
+  </section>
+
+  <!-- ════════════ WORK EXPERIENCE ════════════ -->
+  <section id="experience">
+    <div class="container">
+      <h2 class="fade-in">Work Experience</h2>
+      <p class="section-subtitle fade-in">A diverse professional background spanning technology, education, and content creation.</p>
+
+      <div class="experience-list">
+        <div class="exp-card fade-in">
+          <div class="exp-icon">💻</div>
+          <div class="exp-content">
+            <h3>Web Developer — Personal Projects</h3>
+            <div class="exp-meta">2023 – Present · Toronto, Canada</div>
+            <p>Building full-stack web applications including a multilingual educational platform (englishstoianova.ca) with Astro SSG, TypeScript, Tailwind CSS, i18n, SEO optimization, end-to-end testing, and automated deployment pipelines.</p>
+          </div>
+        </div>
+        <div class="exp-card fade-in fade-in-delay-1">
+          <div class="exp-icon">🎓</div>
+          <div class="exp-content">
+            <h3>ESL Instructor — Language College</h3>
+            <div class="exp-meta">2022 – 2024 · Toronto, Canada</div>
+            <p>Taught English at an international language college, leading CELPIP exam preparation classes and general English courses for students from over 10 countries. Developed curriculum and helped 100+ students achieve their target exam scores.</p>
+          </div>
+        </div>
+        <div class="exp-card fade-in fade-in-delay-2">
+          <div class="exp-icon">🎙️</div>
+          <div class="exp-content">
+            <h3>Content Creator &amp; Podcast Host</h3>
+            <div class="exp-meta">2023 – Present</div>
+            <p>Creating educational content on social media and hosting an English-language podcast. Managing end-to-end content production including scripting, recording, editing, and distribution across platforms.</p>
+          </div>
+        </div>
+        <div class="exp-card fade-in fade-in-delay-3">
+          <div class="exp-icon">🌍</div>
+          <div class="exp-content">
+            <h3>Online English Tutor &amp; Exam Specialist</h3>
+            <div class="exp-meta">2018 – 2022</div>
+            <p>Provided one-on-one and group online instruction specializing in Cambridge exam preparation (FCE, CAE, CPE), IELTS, and American pronunciation training. Built a client base through referrals and social media presence.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ WORK SAMPLES / PROJECTS (Rubric §3) ════════════ -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="fade-in">Work Samples</h2>
+      <p class="section-subtitle fade-in">Selected projects demonstrating full-stack development skills.</p>
+
+      <div class="projects-grid">
+        <div class="project-card fade-in">
+          <div class="project-card-body">
+            <h3>englishstoianova.ca</h3>
+            <p>
+              A fully custom multilingual website built from scratch as a personal project. Features four-language internationalization (EN/RU/UK/ES), SEO optimization, podcast integration, a contact system, and content management — all deployed as a static site for fast performance.
+            </p>
+            <div class="project-tags">
+              <span>Astro SSG</span>
+              <span>TypeScript</span>
+              <span>Tailwind CSS</span>
+              <span>i18n (Paraglide)</span>
+              <span>Node.js</span>
+              <span>Playwright</span>
+            </div>
+            <div class="project-links">
+              <a href="https://englishstoianova.ca/en/" target="_blank" rel="noopener">Live Site ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card fade-in fade-in-delay-1">
+          <div class="project-card-body">
+            <h3>Lost and Found — GBC</h3>
+            <p>
+              A collaborative full-stack web application developed for George Brown College. The platform helps students and staff report, search, and claim lost items on campus. Built as a team project with role-based access and real-time item tracking.
+            </p>
+            <div class="project-tags">
+              <span>React</span>
+              <span>Node.js</span>
+              <span>REST API</span>
+              <span>Vercel</span>
+            </div>
+            <div class="project-links">
+              <a href="https://lost-and-found-frontend-gbc.vercel.app/" target="_blank" rel="noopener">Live Demo ↗</a>
+              <a href="https://github.com/jui-wen-chiang/lost-and-found-frontend-GBC" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ EDUCATION & CERTIFICATES (Rubric §4) ════════════ -->
+  <section id="education">
+    <div class="container">
+      <h2 class="fade-in">Education &amp; Acknowledgements</h2>
+      <p class="section-subtitle fade-in">Academic background and professional certifications.</p>
+
+      <!-- Education Timeline -->
+      <div class="education-timeline fade-in">
+        <div class="edu-item">
+          <h3>Diploma, Computer Programming</h3>
+          <div class="edu-meta">George Brown College — Toronto, Canada · 2024 – 2026 (In Progress)</div>
+          <div class="edu-desc">Full-time program focused on software development, databases, web technologies, and systems analysis.</div>
+        </div>
+        <div class="edu-item">
+          <h3>Master of Education</h3>
+          <div class="edu-meta">Teaching English as a Foreign Language</div>
+          <div class="edu-desc">Graduate studies in pedagogy, curriculum design, and applied linguistics.</div>
+        </div>
+        <div class="edu-item">
+          <h3>Bachelor of Economics</h3>
+          <div class="edu-meta">Rostov State Economic University</div>
+          <div class="edu-desc">Undergraduate degree in economics with a strong analytical and quantitative foundation.</div>
+        </div>
+      </div>
+
+      <!-- Certificates -->
+      <h3 class="cert-subtitle fade-in">Certificates &amp; Diplomas</h3>
+      <div class="cert-grid">
+        <div class="cert-item fade-in" data-caption="CELTA — Cambridge Assessment, IH London (Grade A, 2021)">
+          <img src="assets/img/certificates/celta_certificate.jpg" alt="CELTA Certificate" loading="lazy">
+          <div class="cert-label">CELTA (Grade A)</div>
+        </div>
+        <div class="cert-item fade-in" data-caption="TESL Ontario Certification — Toronto, Canada">
+          <img src="assets/img/certificates/tesl_ontario_certificate.png" alt="TESL Ontario Certificate" loading="lazy">
+          <div class="cert-label">TESL Ontario</div>
+        </div>
+        <div class="cert-item fade-in" data-caption="CELPIP Instructor Certification (2023)">
+          <img src="assets/img/certificates/celpip_certificate.png" alt="CELPIP Certificate" loading="lazy">
+          <div class="cert-label">CELPIP Instructor</div>
+        </div>
+        <div class="cert-item fade-in" data-caption="Cambridge CPE — Certificate of Proficiency in English (C2, 2019)">
+          <img src="assets/img/certificates/CPE.jpg" alt="CPE Certificate" loading="lazy">
+          <div class="cert-label">CPE (C2)</div>
+        </div>
+        <div class="cert-item fade-in" data-caption="Cambridge CAE — Certificate in Advanced English (C1, 2021)">
+          <img src="assets/img/certificates/CAE.jpg" alt="CAE Certificate" loading="lazy">
+          <div class="cert-label">CAE (C1)</div>
+        </div>
+        <div class="cert-item fade-in" data-caption="Cambridge FCE — First Certificate in English (B2)">
+          <img src="assets/img/certificates/FCE.jpg" alt="FCE Certificate" loading="lazy">
+          <div class="cert-label">FCE (B2)</div>
+        </div>
+        <div class="cert-item fade-in" data-caption="CAEL — Canadian Academic English Language Assessment">
+          <img src="assets/img/certificates/CAEL.jpg" alt="CAEL Certificate" loading="lazy">
+          <div class="cert-label">CAEL</div>
+        </div>
+        <div class="cert-item fade-in" data-caption="IELTS Academic Certificate (2022)">
+          <img src="assets/img/certificates/ielts_academic_certificate.jpg" alt="IELTS Academic Certificate" loading="lazy">
+          <div class="cert-label">IELTS Academic</div>
+        </div>
+        <div class="cert-item fade-in" data-caption="IELTS General Training Certificate (2022)">
+          <img src="assets/img/certificates/ielts_general_certificate.jpg" alt="IELTS General Certificate" loading="lazy">
+          <div class="cert-label">IELTS General</div>
+        </div>
+        <div class="cert-item fade-in" data-caption="TKT Module 1 — Teaching Knowledge Test (Cambridge, 2019)">
+          <img src="assets/img/certificates/TKT_1.jpg" alt="TKT Module 1 Certificate" loading="lazy">
+          <div class="cert-label">TKT Module 1</div>
+        </div>
+        <div class="cert-item fade-in" data-caption="TKT Module 2 — Teaching Knowledge Test (Cambridge, 2019)">
+          <img src="assets/img/certificates/TKT_2.jpg" alt="TKT Module 2 Certificate" loading="lazy">
+          <div class="cert-label">TKT Module 2</div>
+        </div>
+        <div class="cert-item fade-in" data-caption="TKT Module 3 — Teaching Knowledge Test (Cambridge, 2019)">
+          <img src="assets/img/certificates/TKT_3.jpg" alt="TKT Module 3 Certificate" loading="lazy">
+          <div class="cert-label">TKT Module 3</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ CONTACT ════════════ -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="fade-in">Contact</h2>
+      <p class="section-subtitle fade-in">Feel free to reach out — I'd love to connect.</p>
+
+      <div class="contact-grid">
+        <a href="https://github.com/AnastasiiaStoianova2025" class="contact-item fade-in" target="_blank" rel="noopener">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.21 3.43 9.64 8.21 11.21.6.11.82-.26.82-.57v-2.18c-3.34.72-4.04-1.41-4.04-1.41-.55-1.37-1.33-1.74-1.33-1.74-1.09-.73.08-.72.08-.72 1.2.09 1.84 1.22 1.84 1.22 1.07 1.8 2.8 1.28 3.49.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.5.12-3.12 0 0 1-.32 3.3 1.21a11.6 11.6 0 0 1 6.01 0c2.3-1.53 3.3-1.21 3.3-1.21.66 1.62.25 2.82.12 3.12.77.83 1.24 1.88 1.24 3.17 0 4.54-2.81 5.53-5.48 5.83.43.37.81 1.1.81 2.22v3.29c0 .31.22.69.82.57C20.57 21.93 24 17.5 24 12.29 24 5.78 18.63.5 12 .5z"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/englishstoianova/" class="contact-item fade-in fade-in-delay-1" target="_blank" rel="noopener">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.21 0 22.23 0z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://englishstoianova.ca/en/" class="contact-item fade-in fade-in-delay-2" target="_blank" rel="noopener">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+          englishstoianova.ca
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ FOOTER ════════════ -->
+  <footer>
+    <div>&copy; 2026 Anastasiia Stoianova. All rights reserved.</div>
+    <div class="footer-tagline"><a href="mailto:anastasiia.stoianova2025@gmail.com" style="color:inherit;text-decoration:none;">anastasiia.stoianova2025@gmail.com</a></div>
+    <div class="footer-tagline">Built with HTML, CSS &amp; JavaScript</div>
+  </footer>
+
+  <!-- ════════════ LIGHTBOX ════════════ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Certificate viewer">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <img src="" alt="">
+    <div class="lightbox-caption"></div>
+  </div>
+
+  <!-- ════════════ JAVASCRIPT ════════════ -->
+  <script>
+    // ── Mobile Menu ──
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      hamburger.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ── Active Nav Highlighting ──
+    const sections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav-links a');
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navItems.forEach(a => a.classList.remove('active'));
+          const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => sectionObserver.observe(s));
+
+    // ── Scroll Fade-In Animations ──
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+    // ── Certificate Lightbox ──
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = lightbox.querySelector('img');
+    const lbCaption = lightbox.querySelector('.lightbox-caption');
+    const lbClose = lightbox.querySelector('.lightbox-close');
+
+    document.querySelectorAll('.cert-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbCaption.textContent = item.dataset.caption || '';
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    lbClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+    });
+  </script>
+</body>
+</html>
